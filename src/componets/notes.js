@@ -1,6 +1,16 @@
 import React from "react";
 import { List, Card } from "antd";
 
+function GenerateRandomColor() {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+console.log(GenerateRandomColor());
+
 function AppNote() {
   const data = [
     {
@@ -49,7 +59,12 @@ function AppNote() {
         dataSource={data}
         renderItem={(item) => (
           <List.Item>
-            <Card title={item.title}>{item.content}</Card>
+            <Card
+              style={{ backgroundColor: GenerateRandomColor() }}
+              title={item.title}
+            >
+              {item.content}
+            </Card>
           </List.Item>
         )}
       />

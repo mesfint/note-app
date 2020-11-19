@@ -36,6 +36,10 @@ body {
   margin-top: 20px;
 }
 
+/*Add note Modal */
+.addNewModal {
+  display: none;
+}
 .footer {
   text-align: center;
 }
