@@ -1,5 +1,12 @@
-import React from 'react';
+import React from "react";
+import { Button } from "antd";
 
 function AppHeader() {
-return ();    
+  return (
+    <div>
+      <Button type="primary">+ New note</Button>
+    </div>
+  );
 }
+
+export default AppHeader;
