@@ -7,11 +7,13 @@ const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
   return (
-    <Layout className="container-fluid">
-      <Header className="site-page-header" />
-      <Sider>Sider</Sider>
-      <Content>Content</Content>
-      <Footer>Footer</Footer>
+    <Layout className="mainLayout">
+      <div className="container-fluid">
+        <Header>Header</Header>
+        <Sider>Sider</Sider>
+        <Content>Content</Content>
+        <Footer>Footer</Footer>
+      </div>
     </Layout>
   );
 }
