@@ -31,9 +31,10 @@ function App() {
           </Button>
         </Menu>
         <Modal
-          title="Basic Modal"
+          title="Add note"
           visible={showModal}
           onClose={onClose}
+          okText={"ADD"}
           onOk={onOk}
           onCancel={onCancle}
           visible={visible}

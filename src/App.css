@@ -35,10 +35,20 @@ body {
 .site-card-wrapper {
   margin-top: 20px;
 }
-
+.editNote {
+  display: flex;
+}
 /*Add note Modal */
 .addNewModal {
   display: none;
+}
+.edit {
+  flex-basis: 100%;
+  color: #000;
+}
+.edit a,
+.del a {
+  color: #000;
 }
 .footer {
   text-align: center;
