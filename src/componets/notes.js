@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { List, Card, Modal, Input } from "antd";
+import React, { useState } from 'react';
+import { List, Card, Modal, Input } from 'antd';
 
 const { TextArea } = Input;
+
 function generatecolor() {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
+  const letters = '0123456789ABCDEF';
+  let color = '#';
   for (let i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
@@ -29,9 +30,9 @@ function AppNote() {
   };
   const data = [
     {
-      title: "Startup meeting",
+      title: 'Startup meeting',
       content:
-        "Learn about the cloud, including the history, building blocks, and types on your way to becoming a Cloud Administrator.",
+        'Learn about the cloud, including the history, building blocks, and types on your way to becoming a Cloud Administrator.',
       edit: (
         <a href="#">
           <i className="fas fa-pen" onClick={showModal}></i>
@@ -44,9 +45,9 @@ function AppNote() {
       ),
     },
     {
-      title: "Bootcamp Practice",
+      title: 'Bootcamp Practice',
       content:
-        "Breakpoints are the key moments when a design is adapted to a new screen size; for example, a breakpoint",
+        'Breakpoints are the key moments when a design is adapted to a new screen size; for example, a breakpoint',
       edit: (
         <a href="#">
           <i className="fas fa-pen" onClick={showModal}></i>
@@ -59,9 +60,9 @@ function AppNote() {
       ),
     },
     {
-      title: "Code war practice",
+      title: 'Code war practice',
       content:
-        "Breakpoints are the key moments when a design is adapted to a new screen size; for example, a breakpoint",
+        'Breakpoints are the key moments when a design is adapted to a new screen size; for example, a breakpoint',
       edit: (
         <a href="#">
           <i className="fas fa-pen" onClick={showModal}></i>
@@ -74,9 +75,9 @@ function AppNote() {
       ),
     },
     {
-      title: "Mentorship meeting",
+      title: 'Mentorship meeting',
       content:
-        "Breakpoints are the key moments when a design is adapted to a new screen size; for example, a breakpoint",
+        'Breakpoints are the key moments when a design is adapted to a new screen size; for example, a breakpoint',
       edit: (
         <a href="#">
           <i className="fas fa-pen" onClick={showModal}></i>
@@ -89,9 +90,9 @@ function AppNote() {
       ),
     },
     {
-      title: "Design Figma wireframes",
+      title: 'Design Figma wireframes',
       content:
-        "Breakpoints are the key moments when a design is adapted to a new screen size; for example, a breakpoint",
+        'Breakpoints are the key moments when a design is adapted to a new screen size; for example, a breakpoint',
       edit: (
         <a href="#">
           <i className="fas fa-pen" onClick={showModal}></i>
@@ -104,9 +105,9 @@ function AppNote() {
       ),
     },
     {
-      title: "Finish projects",
+      title: 'Finish projects',
       content:
-        "Breakpoints are the key moments when a design is adapted to a new screen size; for example, a breakpoint",
+        'Breakpoints are the key moments when a design is adapted to a new screen size; for example, a breakpoint',
       edit: (
         <a href="#">
           <i className="fas fa-pen" onClick={showModal}></i>
@@ -149,7 +150,7 @@ function AppNote() {
               title="Edit note"
               visible={showModal}
               onClose={onClose}
-              okText={"EDIT"}
+              okText={'EDIT'}
               onOk={onOk}
               onCancel={onCancle}
               visible={visible}

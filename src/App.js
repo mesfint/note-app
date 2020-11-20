@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import "./App.css";
-import AppSearch from "./componets/search";
-import AppNote from "./componets/notes";
+import React, { useState } from 'react';
+import './App.css';
+import AppSearch from './componets/search';
+import AppNote from './componets/notes';
 
-import { Layout, Menu, Button, Modal, Input } from "antd";
+import { Layout, Menu, Button, Modal, Input } from 'antd';
 const { TextArea } = Input;
 const { Header, Content, Footer } = Layout;
 
@@ -34,7 +34,7 @@ function App() {
           title="Add note"
           visible={showModal}
           onClose={onClose}
-          okText={"ADD"}
+          okText={'ADD'}
           onOk={onOk}
           onCancel={onCancle}
           visible={visible}
