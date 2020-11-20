@@ -1,55 +1,23 @@
-import React, { useState } from 'react';
-import './App.css';
-import AppSearch from './componets/search';
-import AppNote from './componets/notes';
+import React from 'react';
 
-import { Layout, Menu, Button, Modal, Input } from 'antd';
-const { TextArea } = Input;
-const { Header, Content, Footer } = Layout;
+import 'antd/dist/antd.css';
 
-function App() {
-  const [visible, setVisible] = useState(false);
+// TODO try to add webpack alias in CRA to avoid '../../' in the future
+import { Notes } from './components';
+// index files are really helpful
+import { Layout } from './modules';
+// Adding global styles through styled components utilities and also as a component
+import { GlobalStyles } from './GlobalStyles';
 
-  const showModal = () => {
-    setVisible(true);
-  };
-  const onClose = () => {
-    setVisible(false);
-  };
-  const onOk = () => {
-    setVisible(false);
-  };
-  const onCancle = () => {
-    setVisible(false);
-  };
+// Structure is clean
+// Use Row Col for spacing and even better spacing, clear structure
+export const App = () => {
   return (
-    <Layout>
-      <Header className="header">
-        <Menu theme="dark" mode="horizontal">
-          <Button type="primary" size="large" onClick={showModal}>
-            +New note
-          </Button>
-        </Menu>
-        <Modal
-          title="Add note"
-          visible={showModal}
-          onClose={onClose}
-          okText={'ADD'}
-          onOk={onOk}
-          onCancel={onCancle}
-          visible={visible}
-        >
-          <TextArea rows={4} />
-        </Modal>
-      </Header>
-      <Content className="site-layout">
-        <div className="site-layout-background">
-          <AppNote />
-        </div>
-      </Content>
-      <Footer className="footer">MesfinT ©2020</Footer>
-    </Layout>
+    <>
+      <GlobalStyles />
+      <Layout>
+        <Notes />
+      </Layout>
+    </>
   );
-}
-
-export default App;
+};
