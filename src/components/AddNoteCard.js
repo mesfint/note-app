@@ -74,14 +74,17 @@ export const AddNoteCard = () => {
   };
 
   const handleNoteSubmit = () => {
-    setNotes((note) => note.concat({ title, notes }));
-
+    setNotes((notes) =>
+      notes.concat({ title, desc: input, id: notes.length + 1 })
+    );
     setVisible(false);
   };
+  console.log(notes);
 
   const handleCancel = (e) => {
     setVisible(false);
   };
+
   function genetrateId() {
     return '_' + Math.random().toString(36).substr(2, 9);
   }
@@ -107,8 +110,8 @@ export const AddNoteCard = () => {
           />
           <SpacingTop />
           <TextArea
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             placeholder={'Please type your note'}
             rows={4}
           />
