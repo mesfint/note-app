@@ -3,5 +3,5 @@
 // TODO, move components to proper module if it's used once
 // Remove comments later
 
-export { Notes } from './Notes';
+/* export { Notes } from './Notes'; */
 export { NotesSearch } from './NotesSearch';

@@ -7,6 +7,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
+    background: red;
     font-size: 16px;
     max-width: 100%;
     overflow-x: hidden;

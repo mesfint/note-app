@@ -3,7 +3,8 @@ import React from 'react';
 import 'antd/dist/antd.css';
 
 // TODO try to add webpack alias in CRA to avoid '../../' in the future
-import { Notes } from './components';
+
+import { Notes } from './modules/notes';
 // index files are really helpful
 import { Layout } from './modules';
 // Adding global styles through styled components utilities and also as a component
