@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Notes } from '../modules/notes';
 import styled from 'styled-components';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { NotesModal } from './NotesModal';
+
 import {
   List,
   Card,
@@ -116,6 +118,7 @@ export const AddNoteCard = () => {
             rows={4}
           />
         </Modal>
+        <Notes title={setTitle} notes={setNotes} />
       </Container>
     </div>
   );
