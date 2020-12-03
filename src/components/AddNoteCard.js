@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { Notes } from '../modules/notes';
+import React from 'react';
+import { v4 as uuid } from 'uuid';
 import styled from 'styled-components';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { NotesModal } from './NotesModal';
 
 import {
   List,
@@ -15,6 +14,7 @@ import {
   Space,
   Button,
 } from 'antd';
+import { NoteList } from '../modules';
 
 const { TextArea } = Input;
 
@@ -38,58 +38,36 @@ const SpacingTop = styled.div({
   marginTop: '1rem',
 });
 
-/* Modal styles */
-
 // Add icons package from ant https://ant.design/components/icon/
 // and use some neat icon
-export const AddNoteCard = () => {
-  const [visible, setVisible] = useState(false);
-  const [title, setTitle] = useState();
-  const [input, setInput] = useState('');
-  const [notes, setNotes] = useState([
-    {
-      id: 1,
-      title: 'Startup meeting',
-      content:
-        'Learn about the cloud, including the history, building blocks, and types on your way to becoming a Cloud Administrator.',
-    },
-    {
-      id: 2,
-      title: 'Bootcamp Practice',
-      content:
-        'Breakpoints are the key moments when a design is adapted to a new screen size; for example, a breakpoint',
-    },
-    {
-      id: 3,
-      title: 'Code war practice',
-      content:
-        'Breakpoints are the key moments when a design is adapted to a new screen size; for example, a breakpoint',
-    },
-  ]);
-
-  /*   const openModal = () => {
-    setShowModal((prev) => !prev);
-  }; */
+export const AddNoteCard = ({ addNote }) => {
+  const [visible, setVisible] = React.useState(false);
+  const [note, setNote] = React.useState({
+    id: '',
+    text: '',
+  });
 
   const showModal = () => {
     setVisible(true);
   };
 
-  const handleNoteSubmit = () => {
-    setNotes((notes) =>
-      notes.concat({ title, desc: input, id: notes.length + 1 })
-    );
-    setVisible(false);
-  };
-  console.log(notes);
-
   const handleCancel = (e) => {
     setVisible(false);
   };
 
-  function genetrateId() {
-    return '_' + Math.random().toString(36).substr(2, 9);
-  }
+  const handleNoteSubmit = (event) => {
+    event.preventDefault();
+    if (note.text.trim()) {
+      addNote({ ...note, id: uuid() });
+
+      //reset input
+      setNote({ ...note, text: '' });
+    }
+    setVisible(false);
+  };
+  const handleNoteInputChange = (event) => {
+    setNote({ ...note, text: event.target.value });
+  };
 
   return (
     <div>
@@ -99,26 +77,23 @@ export const AddNoteCard = () => {
           visible={visible}
           setVisible={setVisible}
           title=" Please type your note"
-          visible={visible}
           onOk={handleNoteSubmit}
           okText={'ADD'}
           onCancel={handleCancel}
         >
-          <TextArea
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder={'Title'}
-            rows={1}
-          />
           <SpacingTop />
-          <TextArea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder={'Please type your note'}
-            rows={4}
-          />
+          <form onSubmit={handleNoteSubmit}>
+            <TextArea
+              type="text"
+              name="note"
+              value={note.text}
+              onChange={handleNoteInputChange}
+              placeholder="Please type your note"
+              rows={4}
+            />
+            {'color2 color3 color4'}
+          </form>
         </Modal>
-        <Notes title={setTitle} notes={setNotes} />
       </Container>
     </div>
   );
