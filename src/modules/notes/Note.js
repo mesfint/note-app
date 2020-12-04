@@ -44,7 +44,7 @@ const pinkButton = {
 };
 
 export const Note = ({ note, deleteNote }) => {
-  const [background, setBackground] = React.useState('#cdcdcd');
+  const [background, setBackground] = React.useState('#424246');
   const [font, setFont] = React.useState('#cdcdcd');
   const colors = [
     {
