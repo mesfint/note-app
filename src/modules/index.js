@@ -1,2 +1,2 @@
 export { Layout } from './layout';
-export { Notes } from './notes';
+export { NoteList } from './notes';
