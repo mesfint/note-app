@@ -1,18 +1,10 @@
-import React, { useState } from 'react';
-import { List, Card, Modal, Input, Row, Col, Typography, Space } from 'antd';
+import React from 'react';
+import { Row, Col, Typography } from 'antd';
 
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  DeleteOutlined,
-} from '@ant-design/icons';
 import styled from 'styled-components';
 import { Note } from './Note';
 
-const { Meta } = Card;
-
 const { Text } = Typography;
-const { TextArea } = Input;
 
 const Container = styled(Row)({
   marginTop: '2rem',
@@ -57,13 +49,14 @@ export const NoteList = ({ notes, deleteNote }) => {
         </Col>
 
         <SpacingTop />
-        <Row gutter={[16, 16]}>
-          {notes.map((note) => (
-            <Col span={8}>
+
+        {notes.map((note) => (
+          <Row gutter={[16, 16]}>
+            <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }}>
               <Note key={note.id} note={note} deleteNote={deleteNote} />
             </Col>
-          ))}
-        </Row>
+          </Row>
+        ))}
       </Container>
       <SpacingTop />
     </>

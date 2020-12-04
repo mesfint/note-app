@@ -14,7 +14,8 @@ import {
   Space,
   Button,
 } from 'antd';
-import { NoteList } from '../modules';
+import { NoteList } from '../modules/notes/NoteList';
+import { Note } from '../modules/notes/Note';
 
 const { TextArea } = Input;
 
@@ -91,7 +92,6 @@ export const AddNoteCard = ({ addNote }) => {
               placeholder="Please type your note"
               rows={4}
             />
-            {'color2 color3 color4'}
           </form>
         </Modal>
       </Container>
