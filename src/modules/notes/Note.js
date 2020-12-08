@@ -44,34 +44,12 @@ const pinkButton = {
 };
 
 export const Note = ({ note, deleteNote }) => {
-  const [background, setBackground] = React.useState('#424246');
-  const [font, setFont] = React.useState('#cdcdcd');
-  const colors = [
-    {
-      green: '#c0ffc1',
-      font1: '#424246',
-    },
-    {
-      purple: '#551a8b',
-      font2: '#fff',
-    },
-    {
-      orange: '#ffa500',
-      font3: '##000',
-    },
-    {
-      pink: '#ffc0cb',
-      font4: '#424246',
-    },
-  ];
-  colors.map((color) => {
-    console.log(color.pink);
-    console.log(color.pink);
-  });
+  const [background, setBackground] = React.useState('#fff');
+  const [fontColor, setFontColor] = React.useState('#000');
 
-  const setStyle = (background, font) => {
+  const setStyle = (background, fontColor) => {
     setBackground(background);
-    setFont(font);
+    setFontColor(fontColor);
   };
 
   // Only run this  first time the component rendered
@@ -80,7 +58,7 @@ export const Note = ({ note, deleteNote }) => {
   //This runs every time the state changes and the bgcolor saved into LS
   //fonts
 
-  React.useEffect(() => {
+  /*  React.useEffect(() => {
     const data1 = localStorage.getItem('bg_color');
 
     if (data1) {
@@ -94,16 +72,16 @@ export const Note = ({ note, deleteNote }) => {
     if (data2) {
       setBackground(JSON.parse(data2));
     }
-  }, []);
+  }, []); */
   //and brings back to Browser
-  React.useEffect(() => {
+  /*   React.useEffect(() => {
     localStorage.setItem('bg_color', JSON.stringify(background));
   }, [background]);
 
   React.useEffect(() => {
-    localStorage.setItem('fonts_color', JSON.stringify(font));
-  }, [font]);
-
+    localStorage.setItem('fonts_color', JSON.stringify(fontColor));
+  }, [fontColor]);
+ */
   //This runs every time the state changes and the bgcolor saved into LS
   //and brings back to Browser
   /*   React.useEffect(() => {
@@ -112,9 +90,7 @@ export const Note = ({ note, deleteNote }) => {
   const handleDeleteNote = (id) => {
     deleteNote(note.id);
   };
-  const handleColorChange = () => {
-    setStyle();
-  };
+
   return (
     <>
       <Card
@@ -123,43 +99,42 @@ export const Note = ({ note, deleteNote }) => {
           padding: '1rem',
           marginRight: '15px',
           background: `${background}`,
-          color: `${font}`,
+          color: `${fontColor}`,
         }}
         cover={note.text}
         actions={[
           <DeleteOutlined key="delete" onClick={handleDeleteNote} />,
           <EditOutlined key="edit" />,
         ]}
-      >
-        <Buttons>
-          <div>
-            <button
-              onClick={() => {
-                setStyle('#c0ffc1', '#424246');
-              }}
-              style={greenButton}
-            ></button>
-            <button
-              onClick={() => {
-                setStyle('#551a8b', '#fff');
-              }}
-              style={purpleButton}
-            ></button>
-            <button
-              onClick={() => {
-                setStyle('#ffa500', '#000');
-              }}
-              style={orangeButton}
-            ></button>
-            <button
-              onClick={() => {
-                setStyle('#ffc0cb', '#424246');
-              }}
-              style={pinkButton}
-            ></button>
-          </div>
-        </Buttons>
-      </Card>
+      ></Card>
+      <Buttons>
+        <div>
+          <button
+            onClick={() => {
+              setStyle('#c0ffc1', '#424246');
+            }}
+            style={greenButton}
+          ></button>
+          <button
+            onClick={() => {
+              setStyle('#551a8b', '#fff');
+            }}
+            style={purpleButton}
+          ></button>
+          <button
+            onClick={() => {
+              setStyle('#ffa500', '#000');
+            }}
+            style={orangeButton}
+          ></button>
+          <button
+            onClick={() => {
+              setStyle('#ffc0cb', '#424246');
+            }}
+            style={pinkButton}
+          ></button>
+        </div>
+      </Buttons>
     </>
   );
 };

@@ -51,9 +51,9 @@ export const NoteList = ({ notes, deleteNote }) => {
         <SpacingTop />
 
         {notes.map((note) => (
-          <Row gutter={[16, 16]}>
+          <Row gutter={[16, 16]} key={note.id}>
             <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }}>
-              <Note key={note.id} note={note} deleteNote={deleteNote} />
+              <Note note={note} deleteNote={deleteNote} />
             </Col>
           </Row>
         ))}
