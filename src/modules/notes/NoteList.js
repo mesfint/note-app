@@ -31,6 +31,7 @@ export const NoteList = ({
   editNote,
   editingText,
   setEditingText,
+  onEditNote,
 }) => {
   // There is a lot of duplication for edit/delete, please try to extract it, also it would make sense
   // to create a Note.js component to abstract Note logic/styling
@@ -39,16 +40,13 @@ export const NoteList = ({
 
   // TODO Try to present empty state when there are no Notes
   // Add some + icon and polish it up
-  let message;
-  {
-    notes.length === 0 ? (message = 'no') : (message = `${notes.length}`);
-  }
+  const noteAmountMessage = notes.length === 0 ? 'no' : notes.length;
 
   return (
     <>
       <Container justify="center">
         <Col xs={24}>
-          <CenteredText>You have {message} notes .</CenteredText>
+          <CenteredText>You have {noteAmountMessage} notes .</CenteredText>
         </Col>
         <Col xs={24}>
           <CenteredText>
@@ -62,7 +60,12 @@ export const NoteList = ({
         {notes.map((note) => (
           <Row gutter={[16, 16]} key={note.id}>
             <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }}>
-              <Note note={note} deleteNote={deleteNote} editNote={editNote} />
+              <Note
+                note={note}
+                deleteNote={deleteNote}
+                editNote={editNote}
+                onEditNote={onEditNote}
+              />
             </Col>
           </Row>
         ))}

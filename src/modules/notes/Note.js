@@ -47,7 +47,7 @@ const pinkButton = {
   border: '1px solid grey',
 };
 
-export const Note = ({ note, editNote, deleteNote }) => {
+export const Note = ({ note, deleteNote, onEditNote }) => {
   const [background, setBackground] = React.useState('#fff');
   const [fontColor, setFontColor] = React.useState('#000');
 
@@ -96,8 +96,8 @@ export const Note = ({ note, editNote, deleteNote }) => {
     deleteNote(note.id);
   };
 
-  const handleEditNote = (id) => {
-    editNote(note.id);
+  const handleEditNote = () => {
+    onEditNote(note);
   };
 
   function confirm(id) {
@@ -123,6 +123,7 @@ export const Note = ({ note, editNote, deleteNote }) => {
           color: `${fontColor}`,
         }}
       >
+        <h3>{note.title}</h3>
         <p>{note.text}</p>
 
         <Popconfirm
@@ -158,7 +159,6 @@ export const Note = ({ note, editNote, deleteNote }) => {
           onClick={handleEditNote}
         />
       </Card>
-
       <Buttons>
         <div>
           <button
