@@ -1,8 +1,12 @@
 import React from 'react';
-import { Card } from 'antd';
+import { Card, Modal, Popconfirm, message } from 'antd';
 import styled from 'styled-components';
 
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import {
+  EditOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+} from '@ant-design/icons';
 
 const Buttons = styled.div`
   display: flex;
@@ -43,7 +47,7 @@ const pinkButton = {
   border: '1px solid grey',
 };
 
-export const Note = ({ note, deleteNote }) => {
+export const Note = ({ note, editNote, deleteNote }) => {
   const [background, setBackground] = React.useState('#fff');
   const [fontColor, setFontColor] = React.useState('#000');
 
@@ -88,25 +92,73 @@ export const Note = ({ note, deleteNote }) => {
     localStorage.setItem('fonts_color', JSON.stringify(font));
   }); */
   const handleDeleteNote = (id) => {
+    //alert('Are you sure want to delete?');
     deleteNote(note.id);
   };
+
+  const handleEditNote = (id) => {
+    editNote(note.id);
+  };
+
+  function confirm(id) {
+    deleteNote(note.id);
+    message.success('Click on Yes');
+  }
+
+  function cancel(e) {
+    console.log(e);
+    message.error('Click on No');
+  }
 
   return (
     <>
       <Card
         style={{
           width: 300,
-          padding: '1rem',
+          height: 'auto',
+          fontSize: '1rem',
+          margin: '0',
           marginRight: '15px',
           background: `${background}`,
           color: `${fontColor}`,
         }}
-        cover={note.text}
-        actions={[
-          <DeleteOutlined key="delete" onClick={handleDeleteNote} />,
-          <EditOutlined key="edit" />,
-        ]}
-      ></Card>
+      >
+        <p>{note.text}</p>
+
+        <Popconfirm
+          title="Are you sure to delete this note?"
+          onConfirm={confirm}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
+        >
+          <DeleteOutlined
+            style={{
+              fontSize: '20px',
+              height: '27px',
+              width: '27px',
+              borderRadius: '50%',
+              border: '2px solid #000',
+              color: '#000',
+              marginLeft: '14rem',
+            }}
+          />
+        </Popconfirm>
+        <EditOutlined
+          style={{
+            fontSize: '20px',
+            color: '#000',
+            height: '27px',
+            width: '27px',
+            borderRadius: '50%',
+            border: '2px solid #000',
+            margin: '0.5rem 0 2rem 14rem',
+            cursor: 'pointer',
+          }}
+          onClick={handleEditNote}
+        />
+      </Card>
+
       <Buttons>
         <div>
           <button

@@ -25,7 +25,13 @@ const SpacingTop = styled.div({
 // Also fix layout a little bit, add some box shadow, proper colors for text and background
 // Check colors here e.g.: https://ant.design/docs/spec/colors#header
 
-export const NoteList = ({ notes, deleteNote }) => {
+export const NoteList = ({
+  notes,
+  deleteNote,
+  editNote,
+  editingText,
+  setEditingText,
+}) => {
   // There is a lot of duplication for edit/delete, please try to extract it, also it would make sense
   // to create a Note.js component to abstract Note logic/styling
   // and manage notes, adding, editing, deleting
@@ -33,17 +39,20 @@ export const NoteList = ({ notes, deleteNote }) => {
 
   // TODO Try to present empty state when there are no Notes
   // Add some + icon and polish it up
-  /*   if (notes.length === 0) { */
+  let message;
+  {
+    notes.length === 0 ? (message = 'no') : (message = `${notes.length}`);
+  }
 
   return (
     <>
       <Container justify="center">
         <Col xs={24}>
-          <CenteredText>You have no notes yet.</CenteredText>
+          <CenteredText>You have {message} notes .</CenteredText>
         </Col>
         <Col xs={24}>
           <CenteredText>
-            Add one by using the ➕ &nbsp;button below.
+            Add one by using the ➕ &nbsp;button above.
           </CenteredText>
           <SpacingTop />
         </Col>
@@ -53,7 +62,7 @@ export const NoteList = ({ notes, deleteNote }) => {
         {notes.map((note) => (
           <Row gutter={[16, 16]} key={note.id}>
             <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }}>
-              <Note note={note} deleteNote={deleteNote} />
+              <Note note={note} deleteNote={deleteNote} editNote={editNote} />
             </Col>
           </Row>
         ))}

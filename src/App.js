@@ -1,5 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
+import { Modal, Button, Space } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 // TODO try to add webpack alias in CRA to avoid '../../' in the future
 
@@ -9,9 +11,13 @@ import { AddNoteCard } from './components/AddNoteCard';
 import { Layout } from './modules';
 import { GlobalStyles } from './GlobalStyles';
 
+const { confirm } = Modal;
 // Structure is clean
 // Use Row Col for spacing and even better spacing, clear structure
 export const App = () => {
+  const [noteEditing, setNoteEditing] = React.useState(null);
+  const [editingText, setEditingText] = React.useState('');
+
   const [notes, setNotes] = React.useState([
     {
       id: 1,
@@ -30,10 +36,6 @@ export const App = () => {
     },
   ]);
 
-  //add notes
-  const addNote = (note) => {
-    setNotes([note, ...notes]);
-  };
   //Save notes into Local storage
   //To populate  notes  initially when  the app renders
   //use  useEffect with empty dependency array
@@ -48,9 +50,27 @@ export const App = () => {
     localStorage.setItem('note-taking-app', JSON.stringify(notes));
   }, [notes]);
 
+  //add notes
+  const addNote = (note) => {
+    setNotes([note, ...notes]);
+  };
+  // edit notes
+  const editNote = (id) => {
+    const updatedNotes = [...notes].map((note) => {
+      if (note.id === id) {
+        note.text = editingText;
+      }
+      return note;
+    });
+    setNotes(updatedNotes);
+    setNoteEditing(null);
+    setEditingText('');
+  };
+
   //Delete notes
   const deleteNote = (id) => {
     const removedArr = [...notes].filter((note) => note.id !== id);
+
     setNotes(removedArr);
   };
 
@@ -58,8 +78,43 @@ export const App = () => {
     <>
       <GlobalStyles />
       <Layout>
-        <AddNoteCard addNote={addNote} />
-        <NoteList notes={notes} deleteNote={deleteNote} />
+        <AddNoteCard
+          notes={notes}
+          addNote={addNote}
+          editingText={editingText}
+          noteEditing={noteEditing}
+          setEditingText={setEditingText}
+        />
+        <NoteList notes={notes} deleteNote={deleteNote} editNote={editNote} />
+
+        {/* Edit Notes */}
+
+        {notes.map((note) => (
+          <div key={note.id}>
+            {noteEditing === note.id ? (
+              <input
+                type="text"
+                onChange={(e) => setEditingText(e.target.value)}
+                value={editingText}
+              />
+            ) : (
+              <div className="list-item">
+                {' '}
+                <span>{note.text}</span>
+              </div>
+            )}
+
+            {noteEditing === note.id ? (
+              <button className="btn" onClick={() => editNote(note.id)}>
+                Submit Edit
+              </button>
+            ) : (
+              <button className="btn" onClick={() => setNoteEditing(note.id)}>
+                Edit note
+              </button>
+            )}
+          </div>
+        ))}
       </Layout>
     </>
   );
