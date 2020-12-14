@@ -13,6 +13,7 @@ export const GlobalStyles = createGlobalStyle`
     overflow-x: hidden;
     line-height: 1.6;
   }
+
   
   @media (max-width: 480px) {
     html {

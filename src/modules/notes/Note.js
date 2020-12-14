@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Modal, Popconfirm, message } from 'antd';
+import { Card, Modal, Popconfirm, message, Tooltip } from 'antd';
 import styled from 'styled-components';
 
 import {
@@ -13,32 +13,33 @@ const Buttons = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
   button {
-    font-weight: 500;
+    /* font-weight: 500;
     font-size: 12px;
-    color: red;
-    text-align: center;
+      text-align: center; */
     /* padding: 17px 10px;*/
-    margin: 10px 5px;
-    margin-bottom: 20px;
+    /*  margin: 10px 5px;*/
+    margin: 4px 2px;
+
     border-radius: 50%;
     height: 25px;
     width: 25px;
     cursor: pointer;
   }
 `;
+
 const greenButton = {
   color: '#424246',
   backgroundColor: '#c0ffc1',
   border: '1px solid grey',
 };
-const purpleButton = {
+const redButton = {
   color: '#fff',
-  backgroundColor: '#551a8b',
+  backgroundColor: '#e74c3c',
   border: '1px solid grey',
 };
 const orangeButton = {
   color: '#000',
-  backgroundColor: '#ffa500',
+  backgroundColor: '#ffbe76',
   border: '1px solid grey',
 };
 const pinkButton = {
@@ -102,12 +103,12 @@ export const Note = ({ note, deleteNote, onEditNote }) => {
 
   function confirm(id) {
     deleteNote(note.id);
-    message.success('Click on Yes');
+    /*  message.success('Click on Yes'); */
   }
 
   function cancel(e) {
     console.log(e);
-    message.error('Click on No');
+    /* message.error('Click on No'); */
   }
 
   return (
@@ -117,6 +118,7 @@ export const Note = ({ note, deleteNote, onEditNote }) => {
           width: 300,
           height: 'auto',
           fontSize: '1rem',
+          wordWrap: 'break-word',
           margin: '0',
           marginRight: '15px',
           background: `${background}`,
@@ -161,30 +163,40 @@ export const Note = ({ note, deleteNote, onEditNote }) => {
       </Card>
       <Buttons>
         <div>
-          <button
-            onClick={() => {
-              setStyle('#c0ffc1', '#424246');
-            }}
-            style={greenButton}
-          ></button>
-          <button
-            onClick={() => {
-              setStyle('#551a8b', '#fff');
-            }}
-            style={purpleButton}
-          ></button>
-          <button
-            onClick={() => {
-              setStyle('#ffa500', '#000');
-            }}
-            style={orangeButton}
-          ></button>
-          <button
-            onClick={() => {
-              setStyle('#ffc0cb', '#424246');
-            }}
-            style={pinkButton}
-          ></button>
+          <Tooltip title="High-Priority">
+            <button
+              className="color-info"
+              onClick={() => {
+                setStyle('#e74c3c', '#fff');
+              }}
+              style={redButton}
+            ></button>
+          </Tooltip>
+
+          <Tooltip title="Medium-Priority">
+            <button
+              onClick={() => {
+                setStyle('#ffbe76', '#000');
+              }}
+              style={orangeButton}
+            ></button>
+          </Tooltip>
+          <Tooltip title="Low-Priority">
+            <button
+              onClick={() => {
+                setStyle('#c0ffc1', '#424246');
+              }}
+              style={greenButton}
+            ></button>
+          </Tooltip>
+          <Tooltip title="Normal">
+            <button
+              onClick={() => {
+                setStyle('#ffc0cb', '#424246');
+              }}
+              style={pinkButton}
+            ></button>
+          </Tooltip>
         </div>
       </Buttons>
     </>
