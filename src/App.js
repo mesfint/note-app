@@ -71,8 +71,6 @@ export const App = () => {
     setNotes(removedArr);
   };
 
-  console.log(noteToEdit);
-
   return (
     <>
       <GlobalStyles />
@@ -80,6 +78,7 @@ export const App = () => {
         <AddNoteCard onModalOpen={handleAddNoteModalOpen} />
         <NoteList
           notes={notes}
+          state={setNotes}
           deleteNote={deleteNote}
           editNote={editNote}
           onEditNote={handleEditNoteModalOpen}

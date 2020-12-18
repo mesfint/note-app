@@ -1,6 +1,9 @@
-import React from 'react';
-import { Card, Modal, Popconfirm, message, Tooltip } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Card, Modal, Popconfirm, message, Tooltip, Row, Col } from 'antd';
 import styled from 'styled-components';
+import Tippy from '@tippyjs/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPalette } from '@fortawesome/free-solid-svg-icons';
 
 import {
   EditOutlined,
@@ -8,90 +11,63 @@ import {
   ExclamationCircleOutlined,
 } from '@ant-design/icons';
 
-const Buttons = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  button {
-    /* font-weight: 500;
-    font-size: 12px;
-      text-align: center; */
-    /* padding: 17px 10px;*/
-    /*  margin: 10px 5px;*/
-    margin: 4px 2px;
+const COLORS = ['#e74c3c', '#ffbe76', '#c0ffc1', '#ffc0cb'];
 
-    border-radius: 50%;
-    height: 25px;
-    width: 25px;
-    cursor: pointer;
-  }
+const NoteWrapper = styled.div(({ backgroundColor }) => ({
+  backgroundColor,
+}));
+
+const Button = styled.button`
+  outline: none;
+  border: none;
+  background: none;
 `;
 
-const greenButton = {
-  color: '#424246',
-  backgroundColor: '#c0ffc1',
+const ColorWrapper = styled.div(({ backgroundColor }) => ({
+  marginRight: ' -7px',
+  borderRadius: '50%',
+  height: '20px',
+  width: '20px',
   border: '1px solid grey',
-};
-const redButton = {
-  color: '#fff',
-  backgroundColor: '#e74c3c',
-  border: '1px solid grey',
-};
-const orangeButton = {
-  color: '#000',
-  backgroundColor: '#ffbe76',
-  border: '1px solid grey',
-};
-const pinkButton = {
-  color: '#424246',
-  backgroundColor: '#ffc0cb',
-  border: '1px solid grey',
+  backgroundColor,
+  cursor: 'pointer',
+}));
+
+const Color = ({ backgroundColor }) => {
+  return <ColorWrapper backgroundColor={backgroundColor} />;
 };
 
-export const Note = ({ note, deleteNote, onEditNote }) => {
-  const [background, setBackground] = React.useState('#fff');
-  const [fontColor, setFontColor] = React.useState('#000');
+const ColorSwitcher = ({ onColorSwitchClick }) => {
+  return (
+    <Row justify="center" gutter={10}>
+      {COLORS.map((color) => (
+        <Col key={color} onClick={() => onColorSwitchClick(color)}>
+          <Color backgroundColor={color} />
+        </Col>
+      ))}
+    </Row>
+  );
+};
 
-  const setStyle = (background, fontColor) => {
-    setBackground(background);
-    setFontColor(fontColor);
-  };
+export const Note = ({ note, deleteNote, onEditNote, id }) => {
+  const [backgroundColor, setBackgroundColor] = useState(undefined);
 
-  // Only run this  first time the component rendered
-  //(first time when our comp runs we load exsiting data from LS)
+  useEffect(() => {
+    const backgroundColor = localStorage.getItem(`note-${id}-backgroundColor`);
 
-  //This runs every time the state changes and the bgcolor saved into LS
-  //fonts
-
-  /*  React.useEffect(() => {
-    const data1 = localStorage.getItem('bg_color');
-
-    if (data1) {
-      setBackground(JSON.parse(data1));
+    if (backgroundColor) {
+      setBackgroundColor(backgroundColor);
     }
   }, []);
 
-  React.useEffect(() => {
-    const data2 = localStorage.getItem('fonts_color');
+  useEffect(() => {
+    localStorage.setItem(`note-${id}-backgroundColor`, backgroundColor);
+  }, [backgroundColor]);
 
-    if (data2) {
-      setBackground(JSON.parse(data2));
-    }
-  }, []); */
-  //and brings back to Browser
-  /*   React.useEffect(() => {
-    localStorage.setItem('bg_color', JSON.stringify(background));
-  }, [background]);
+  const handleBackgroundColorSwitchClick = (backgroundColor) => {
+    setBackgroundColor(backgroundColor);
+  };
 
-  React.useEffect(() => {
-    localStorage.setItem('fonts_color', JSON.stringify(fontColor));
-  }, [fontColor]);
- */
-  //This runs every time the state changes and the bgcolor saved into LS
-  //and brings back to Browser
-  /*   React.useEffect(() => {
-    localStorage.setItem('fonts_color', JSON.stringify(font));
-  }); */
   const handleDeleteNote = (id) => {
     //alert('Are you sure want to delete?');
     deleteNote(note.id);
@@ -113,92 +89,69 @@ export const Note = ({ note, deleteNote, onEditNote }) => {
 
   return (
     <>
-      <Card
-        style={{
-          width: 300,
-          height: 'auto',
-          fontSize: '1rem',
-          wordWrap: 'break-word',
-          margin: '0',
-          marginRight: '15px',
-          background: `${background}`,
-          color: `${fontColor}`,
-        }}
-      >
-        <h3>{note.title}</h3>
-        <p>{note.text}</p>
-
-        <Popconfirm
-          title="Are you sure to delete this note?"
-          onConfirm={confirm}
-          onCancel={cancel}
-          okText="Yes"
-          cancelText="No"
-        >
-          <DeleteOutlined
-            style={{
-              fontSize: '20px',
-              height: '27px',
-              width: '27px',
-              borderRadius: '50%',
-              border: '2px solid #000',
-              color: '#000',
-              marginLeft: '14rem',
-            }}
-          />
-        </Popconfirm>
-        <EditOutlined
+      <NoteWrapper backgroundColor={backgroundColor}>
+        <Card
+          className="card-style"
+          title={note.title}
           style={{
-            fontSize: '20px',
-            color: '#000',
-            height: '27px',
-            width: '27px',
-            borderRadius: '50%',
-            border: '2px solid #000',
-            margin: '0.5rem 0 2rem 14rem',
-            cursor: 'pointer',
+            width: 315,
+            height: 'auto',
+            fontSize: '1rem',
+            border: '1px solid #cdcdcd',
+            borderRadius: '5px',
+            wordWrap: 'break-word',
+            margin: '0',
+            marginRight: '15px',
+            boxShadow: '0px 8px 25px -8px rgba(0,0,0,0.52)',
+            background: `${backgroundColor}`,
           }}
-          onClick={handleEditNote}
-        />
-      </Card>
-      <Buttons>
-        <div>
-          <Tooltip title="High-Priority">
-            <button
-              className="color-info"
-              onClick={() => {
-                setStyle('#e74c3c', '#fff');
-              }}
-              style={redButton}
-            ></button>
-          </Tooltip>
+        >
+          <p style={{ fontSize: '14px' }}>{note.text}</p>
+          <Tippy
+            interactive={true}
+            content={
+              <ColorSwitcher
+                onColorSwitchClick={handleBackgroundColorSwitchClick}
+              />
+            }
+          >
+            <Button>{<FontAwesomeIcon icon={faPalette} />}</Button>
+          </Tippy>
 
-          <Tooltip title="Medium-Priority">
-            <button
-              onClick={() => {
-                setStyle('#ffbe76', '#000');
+          <Popconfirm
+            title="Are you sure to delete this note?"
+            onConfirm={confirm}
+            onCancel={cancel}
+            okText="Yes"
+            cancelText="No"
+          >
+            <EditOutlined
+              style={{
+                fontSize: '20px',
+                color: '#000',
+                height: '23px',
+                width: '23px',
+                marginRight: '7px',
+                borderRadius: '50%',
+
+                cursor: 'pointer',
               }}
-              style={orangeButton}
-            ></button>
-          </Tooltip>
-          <Tooltip title="Low-Priority">
-            <button
-              onClick={() => {
-                setStyle('#c0ffc1', '#424246');
+              onClick={handleEditNote}
+            />
+            <DeleteOutlined
+              style={{
+                fontSize: '20px',
+                height: '23px',
+                width: '23px',
+                marginRight: '7px',
+                borderRadius: '50%',
+
+                color: '#000',
               }}
-              style={greenButton}
-            ></button>
-          </Tooltip>
-          <Tooltip title="Normal">
-            <button
-              onClick={() => {
-                setStyle('#ffc0cb', '#424246');
-              }}
-              style={pinkButton}
-            ></button>
-          </Tooltip>
-        </div>
-      </Buttons>
+            />
+          </Popconfirm>
+        </Card>
+      </NoteWrapper>
     </>
   );
 };
