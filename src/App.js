@@ -23,6 +23,7 @@ export const App = () => {
   const [notes, setNotes] = useState([]);
   const [addNoteModalOpen, setAddNoteModalOpen] = useState(false);
   const [editNoteModalOpen, setEditNoteModalOpen] = useState(false);
+  const [filterNote, setFilterNote] = useState([]);
 
   const handleAddNoteModalOpen = () => {
     setAddNoteModalOpen(true);

@@ -69,7 +69,7 @@ export const NoteList = ({
       <Row justify="center" gutter={10}>
         {COLORS.map((color) => (
           <Col key={color} onClick={() => onColorSwitchClick(color)}>
-            >
+            <Color backgroundColor={color} />
           </Col>
         ))}
       </Row>
@@ -83,7 +83,9 @@ export const NoteList = ({
     <>
       <div style={{ float: 'right' }}>
         Filter:
-        {/*  <ColorSwitcher onColorSwitchClick={handleBackgroundColorSwitchClick} /> */}
+        <ColorSwitcher
+          onColorSwitchClick={console.log('About  to be implemented')}
+        />
       </div>
       <Container justify="center">
         <Col xs={24}>
