@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Typography } from 'antd';
 
 import styled from 'styled-components';
@@ -27,23 +27,66 @@ const SpacingTop = styled.div({
 
 export const NoteList = ({
   notes,
+  state,
   deleteNote,
   editNote,
   editingText,
   setEditingText,
   onEditNote,
 }) => {
-  // There is a lot of duplication for edit/delete, please try to extract it, also it would make sense
-  // to create a Note.js component to abstract Note logic/styling
-  // and manage notes, adding, editing, deleting
-  // In later sessions we will learn how to manage state easier
+  const [filterNotes, setFilterNotes] = useState([]);
 
-  // TODO Try to present empty state when there are no Notes
+  useEffect(() => {
+    const savedNotes = localStorage.getItem('notes');
+
+    if (savedNotes) {
+      state(JSON.parse(savedNotes));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('notes', JSON.stringify(notes));
+  });
+
+  const COLORS = ['#e74c3c', '#ffbe76', '#c0ffc1', '#ffc0cb'];
+
+  const ColorWrapper = styled.div(({ backgroundColor }) => ({
+    marginRight: ' -7px',
+
+    height: '20px',
+    width: '20px',
+    border: '1px solid grey',
+    backgroundColor,
+    cursor: 'pointer',
+  }));
+
+  const Color = ({ backgroundColor }) => {
+    return <ColorWrapper backgroundColor={backgroundColor} />;
+  };
+
+  const ColorSwitcher = ({ onColorSwitchClick }) => {
+    return (
+      <Row justify="center" gutter={10}>
+        {COLORS.map((color) => (
+          <Col key={color} onClick={() => onColorSwitchClick(color)}>
+            <Color backgroundColor={color} />
+          </Col>
+        ))}
+      </Row>
+    );
+  };
+
   // Add some + icon and polish it up
   const noteAmountMessage = notes.length === 0 ? 'no' : notes.length;
 
   return (
     <>
+      <div style={{ float: 'right' }}>
+        Filter:
+        <ColorSwitcher
+          onColorSwitchClick={console.log('About  to be implemented')}
+        />
+      </div>
       <Container justify="center">
         <Col xs={24}>
           <CenteredText>You have {noteAmountMessage} notes .</CenteredText>
@@ -62,6 +105,7 @@ export const NoteList = ({
             <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }}>
               <Note
                 note={note}
+                id={note.id}
                 deleteNote={deleteNote}
                 editNote={editNote}
                 onEditNote={onEditNote}

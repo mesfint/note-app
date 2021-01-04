@@ -33,7 +33,7 @@ export const Layout = ({ children }) => {
   return (
     <Container>
       <Header>
-        <Title>Notes App</Title>
+        <Title>Note-Taking-App</Title>
       </Header>
       <Content>{children}</Content>
       <Footer>

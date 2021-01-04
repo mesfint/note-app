@@ -7,13 +7,25 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background: red;
-    font-size: 16px;
+   
+   font-size: 16px;
     max-width: 100%;
     overflow-x: hidden;
-    line-height: 1.6;
-  }
+    line-height: 1.6; 
 
+  
+
+    
+  }
+.card-style {
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
+}
+.card-style: hover {
+  transform: scale(1.05);
+}
   
   @media (max-width: 480px) {
     html {
