@@ -44,4 +44,4 @@ Local Url: http://localhost:3000/
 
 # Building & Deployment
 
-- `yarn build`, deploy on e.g. Netlify, add a link to a deployed website
+- `yarn run build`, deploy on e.g. Netlify, (note-app)[https://notes-taking-app1.netlify.app/]
