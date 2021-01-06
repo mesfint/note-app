@@ -1,32 +1,41 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { NoteList } from './modules/notes';
+import { AddNoteCard, AddNoteModal, EditNoteModal } from './components';
+import { Layout } from './modules';
+import { v4 as uuidv4 } from 'uuid';
+import { GlobalStyles } from './GlobalStyles';
 import 'antd/dist/antd.css';
+
 import { Modal, Button, Space } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
-// TODO try to add webpack alias in CRA to avoid '../../' in the future
-
-import { NoteList } from './modules/notes';
-import {
-  NotesSearch,
-  AddNoteCard,
-  AddNoteModal,
-  EditNoteModal,
-} from './components';
-import { Layout } from './modules';
-import { GlobalStyles } from './GlobalStyles';
-
-// Structure is clean
-// Use Row Col for spacing and even better spacing, clear structure
+//App main entry component
 export const App = () => {
   const [noteToEdit, setNoteToEdit] = useState(null);
   const [editingText, setEditingText] = useState('');
-  const [notes, setNotes] = useState([]);
+  let [notes, setNotes] = useState([]);
   const [addNoteModalOpen, setAddNoteModalOpen] = useState(false);
   const [editNoteModalOpen, setEditNoteModalOpen] = useState(false);
   const [filterNote, setFilterNote] = useState([]);
 
   const handleAddNoteModalOpen = () => {
+    const savedNotes = localStorage.getItem('notes');
+    localStorage.setItem('isFilter', false);
+
+    if (savedNotes) {
+      notes = JSON.parse(savedNotes);
+    }
     setAddNoteModalOpen(true);
+    setNotes(notes);
+  };
+  const handleDisplayAllNotes = () => {
+    const savedNotes = localStorage.getItem('notes');
+
+    if (savedNotes) {
+      notes = JSON.parse(savedNotes);
+    }
+
+    setNotes(notes);
   };
 
   const handleAddNoteModalClose = () => {
@@ -44,8 +53,19 @@ export const App = () => {
 
   //add notes
   const addNote = (title, text) => {
+    //Get notes from LS if there is any
+    const savedNotes = localStorage.getItem('notes');
+    localStorage.setItem('isFilter', false);
+
+    //If there is notes in LS we need to parser them for further manipulation
+    //Otherwise add new notes
+
+    if (savedNotes) {
+      notes = JSON.parse(savedNotes);
+    }
     const newNote = {
-      id: notes.length + 1,
+      /*   id: notes.length + 1, */
+      id: uuidv4(),
       title,
       text,
     };
@@ -83,6 +103,7 @@ export const App = () => {
           deleteNote={deleteNote}
           editNote={editNote}
           onEditNote={handleEditNoteModalOpen}
+          displayNotes={handleDisplayAllNotes}
         />
       </Layout>
       <AddNoteModal

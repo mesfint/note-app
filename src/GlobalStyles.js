@@ -32,6 +32,11 @@ export const GlobalStyles = createGlobalStyle`
       font-size: 14px;
     }
   }
+  @media (max-width: 800px) {
+  .container {
+    flex-direction: column;
+  }
+}
 
   @media (min-width: 480px) {
     html {

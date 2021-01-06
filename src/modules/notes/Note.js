@@ -94,14 +94,13 @@ export const Note = ({ note, deleteNote, onEditNote, id }) => {
           className="card-style"
           title={note.title}
           style={{
-            width: 315,
+            width: '25rem',
             height: 'auto',
             fontSize: '1rem',
             border: '1px solid #cdcdcd',
             borderRadius: '5px',
             wordWrap: 'break-word',
-            margin: '0',
-            marginRight: '15px',
+
             boxShadow: '0px 8px 25px -8px rgba(0,0,0,0.52)',
             background: `${backgroundColor}`,
           }}
@@ -118,6 +117,18 @@ export const Note = ({ note, deleteNote, onEditNote, id }) => {
             <Button>{<FontAwesomeIcon icon={faPalette} />}</Button>
           </Tippy>
 
+          <EditOutlined
+            style={{
+              fontSize: '20px',
+              color: '#000',
+              height: '23px',
+              width: '23px',
+              marginRight: '7px',
+
+              cursor: 'pointer',
+            }}
+            onClick={handleEditNote}
+          />
           <Popconfirm
             title="Are you sure to delete this note?"
             onConfirm={confirm}
@@ -125,26 +136,13 @@ export const Note = ({ note, deleteNote, onEditNote, id }) => {
             okText="Yes"
             cancelText="No"
           >
-            <EditOutlined
-              style={{
-                fontSize: '20px',
-                color: '#000',
-                height: '23px',
-                width: '23px',
-                marginRight: '7px',
-                borderRadius: '50%',
-
-                cursor: 'pointer',
-              }}
-              onClick={handleEditNote}
-            />
             <DeleteOutlined
               style={{
                 fontSize: '20px',
                 height: '23px',
                 width: '23px',
                 marginRight: '7px',
-                borderRadius: '50%',
+                cursor: 'pointer',
 
                 color: '#000',
               }}

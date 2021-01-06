@@ -1,21 +1,47 @@
-# About This Project
+# Note-Taking-App
 
-TODO - Explain that it's a note app, in React for having some information related to what to do, remember ,etc.
+## About This Project
+
+Note-Taking-App is useful for our daily and routine task collection,A user can add notes or anything planned to accomplish,
+
+## Features
+
+1.  ### Add/Edit/Remove notes
+
+    Notes can be added also editable and finally can be removed from the app.
+
+2.  ### Local Storage
+
+    Notes are stored in the User's browser storage the moment they are created and persisted as long as the user needed them.
+
+3.  ### Filter Notes
+    Each note can be colored out of four(4) given colors.
+    Filtering the notes using the given square colors pallet
 
 # Technologies Used
 
-TODO - React, ESLint, Prettier, Husky, Ant Design, styled-components...
+- React
+- Hooks
+- ESLint, Prettier, Husky, Ant Design and styled-components...
 
 # Development
 
-TODO - which command to use to install npm packages, which commands to use to start, `yarn start`, etc.
-ONLY MENTION YARN, what is minimum version of node.js and npm is also good to mention
-localhost:3000 -> it's a local URL with a port where the application is running
+```
+Min node verion: 9.0.0
+Min npm verion: 1.2
+```
 
-# Testing
+2.  ### To run the project on local machine
 
-TODO - We will use jest, for unit testing and maybe even we will use Cypress E2E library
+```
+yarn start
+
+```
+
+```
+Local Url: http://localhost:3000/
+```
 
 # Building & Deployment
 
-TODO - `yarn build`, deploy on e.g. Netlify, add a link to a deployed website
+- `yarn build`, deploy on e.g. Netlify, add a link to a deployed website
