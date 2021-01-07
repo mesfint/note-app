@@ -26,7 +26,7 @@ export const GlobalStyles = createGlobalStyle`
 .card-style: hover {
   transform: scale(1.05);
 }
-  
+
   @media (max-width: 480px) {
     html {
       font-size: 14px;

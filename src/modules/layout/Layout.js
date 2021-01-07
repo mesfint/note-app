@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout as AntdLayout, Typography } from 'antd';
 import styled from 'styled-components';
+import { EditOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 const {
@@ -33,7 +34,10 @@ export const Layout = ({ children }) => {
   return (
     <Container>
       <Header>
-        <Title>Note-Taking-App</Title>
+        <Title>
+          Note Taking App
+          <EditOutlined style={{ marginLeft: '5px' }} />
+        </Title>
       </Header>
       <Content>{children}</Content>
       <Footer>

@@ -52,7 +52,7 @@ export const EditNoteModal = ({ note, isOpen, onEditNote, onClose }) => {
       visible={isOpen}
       title="Please edit your note"
       onOk={handleOk}
-      okText={'EDIT'}
+      okText={'SAVE'}
       onCancel={handleClose}
     >
       <SpacingTop />

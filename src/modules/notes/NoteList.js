@@ -66,13 +66,18 @@ export const NoteList = ({
     backgroundColor,
     cursor: 'pointer',
   }));
+
   const DisplayAllButton = styled.div(() => ({
     display: 'flex',
     height: 'auto',
     paddingBottom: '2px',
     border: '1px solid grey',
-
     cursor: 'pointer',
+  }));
+
+  const ActiveColorClicked = styled.div(() => ({
+    border: '2px solid green',
+    fontSize: '1.5rem',
   }));
 
   const Color = ({ backgroundColor }) => {
@@ -111,7 +116,7 @@ export const NoteList = ({
         ))}
 
         <AppstoreOutlined
-          style={{ fontSize: '1.5rem', color: 'grey' }}
+          style={{ fontSize: '1.59rem', color: 'grey', marginTop: '-1px' }}
           onClick={() => {
             displayNotes();
           }}
